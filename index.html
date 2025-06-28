@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srinath G - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            background: rgba(40, 40, 40, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.8s ease;
+        }
+
+        .name {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .quote {
+            font-size: 1.1em;
+            color: #cccccc;
+            font-style: italic;
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .title {
+            font-size: 1.2em;
+            color: #aaaaaa;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: #ffffff;
+        }
+
+        .section {
+            background: rgba(40, 40, 40, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            animation: slideUp 0.6s ease;
+        }
+
+        .section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            border-radius: 2px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #ffffff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-category h3 {
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .skill-item {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            color: #000000;
+            padding: 5px 12px;
+            border-radius: 15px;
+            margin: 3px;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: scale(1.05);
+        }
+
+        .project-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
+        }
+
+        .project-header {
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            color: #000000;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-header:hover {
+            opacity: 0.9;
+        }
+
+        .project-title {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .dropdown-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+        }
+
+        .dropdown-icon.active {
+            transform: rotate(180deg);
+        }
+
+        .project-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            background: rgba(40, 40, 40, 0.9);
+        }
+
+        .project-content.active {
+            max-height: 600px;
+            padding: 20px;
+        }
+
+        .project-description {
+            line-height: 1.6;
+            color: #dddddd;
+        }
+
+        .project-tech {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+        }
+
+        .achievement {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 4px solid #ffffff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .achievement:hover {
+            transform: translateX(10px);
+        }
+
+        .achievement-title {
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .links-section {
+            background: rgba(40, 40, 40, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .link-card {
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            padding: 20px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #000000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .link-icon {
+            font-size: 2em;
+        }
+
+        .link-title {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-circle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-circle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .hero {
+                padding: 20px;
+            }
+            
+            .name {
+                font-size: 2em;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .skills-grid, .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1 class="name">SRINATH G</h1>
+            <p class="quote">"Turning ideas into impact through code and creativity."</p>
+            <p class="title">Computer Science Engineering Student</p>
+            <p style="color: #aaaaaa; max-width: 600px; margin: 0 auto;">Passionate about technology and innovation, I am a Computer Science major with a strong foundation in algorithms, data structures, and software engineering principles. I'm eager to collaborate on exciting projects, contribute to open-source communities, and explore new technologies.</p>
+            
+            <div class="contact-info">
+                <a href="mailto:srinath1568@gmail.com" class="contact-item">
+                    <span>📧</span> srinath1568@gmail.com
+                </a>
+                <span class="contact-item">
+                    <span>📍</span> Coimbatore, Tamil Nadu
+                </span>
+            </div>
+        </div>
+
+        <!-- Education Section -->
+        <div class="section">
+            <h2>🎓 Education</h2>
+            <div class="achievement">
+                <div class="achievement-title">B.E - Computer Science and Engineering (2023 - 2027)</div>
+                <p>Mahalingam College of Engineering and Technology, Pollachi</p>
+            </div>
+            <div class="achievement">
+                <div class="achievement-title">Higher Secondary School (2008 - 2022)</div>
+                <p>Carmel Garden Matriculation Higher Secondary School, Coimbatore</p>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section">
+            <h2>💻 Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <span class="skill-item">Java (Advanced)</span>
+                    <span class="skill-item">C (Intermediate)</span>
+                    <span class="skill-item">Python (Intermediate)</span>
+                    <span class="skill-item">SQL (Intermediate)</span>
+                </div>
+                <div class="skill-category">
+                    <h3>Web Technologies</h3>
+                    <span class="skill-item">HTML (Advanced)</span>
+                    <span class="skill-item">CSS (Advanced)</span>
+                    <span class="skill-item">JavaScript (Basic)</span>
+                </div>
+                <div class="skill-category">
+                    <h3>Frameworks</h3>
+                    <span class="skill-item">Django (Intermediate)</span>
+                    <span class="skill-item">Flutter (Basic)</span>
+                </div>
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <span class="skill-item">MySQL (Intermediate)</span>
+                    <span class="skill-item">SQLite (Intermediate)</span>
+                    <span class="skill-item">MongoDB (Basic)</span>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Platforms</h3>
+                    <span class="skill-item">VSCode</span>
+                    <span class="skill-item">Git</span>
+                </div>
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <span class="skill-item">English</span>
+                    <span class="skill-item">Kannada</span>
+                    <span class="skill-item">Tamil</span>
+                    <span class="skill-item">Hindi (Basic)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="section">
+            <h2>🚀 Projects</h2>
+            
+            <div class="project-card">
+                <div class="project-header" onclick="toggleProject(this)">
+                    <span class="project-title">🤟 Real-Time Sign Language Translator</span>
+                    <span class="dropdown-icon">▼</span>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        The Sign Language Translator is an innovative system designed to bridge the communication gap between hearing-impaired individuals and the wider community. Using a combination of sensors and microcontroller technology, it accurately captures hand gestures representing letters, words, or phrases in sign language. These gestures are then translated in real-time into readable text or audible speech, enabling seamless interaction and understanding. This project is highly impactful in promoting inclusivity and accessibility, especially in educational and public service environments. Its user-friendly interface, compact design, and real-time response make it a practical solution for daily use.
+                    </p>
+                    <p style="font-style: italic; color: #ffffff; margin-top: 10px;">
+                        "Winner of the Best Social Impact Award for its contribution to inclusive communication."
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">CNN</span>
+                        <span class="tech-tag">Random Forest</span>
+                        <span class="tech-tag">Computer Vision</span>
+                        <span class="tech-tag">Machine Learning</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header" onclick="toggleProject(this)">
+                    <span class="project-title">👥 HR Management System using JDBC</span>
+                    <span class="dropdown-icon">▼</span>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        The HR Management System using JDBC is a Java-based application designed to streamline and automate various human resource operations within an organization. Leveraging JDBC (Java Database Connectivity), it connects seamlessly with a backend database to manage employee records, attendance, leaves, salaries, and performance data efficiently. The system provides a secure and user-friendly interface for HR personnel to perform CRUD (Create, Read, Update, Delete) operations, generate reports, and track employee activities in real-time. This project demonstrates strong backend integration and database handling skills, making it ideal for enterprise-level HR tasks and student learning in database application development.
+                    </p>
+                    <p style="font-style: italic; color: #ffffff; margin-top: 10px;">
+                        "Built with a focus on reliability, scalability, and real-time data access for efficient workforce management."
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">JDBC</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">Database Management</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header" onclick="toggleProject(this)">
+                    <span class="project-title">❤️ Heart Disease Monitoring System</span>
+                    <span class="dropdown-icon">▼</span>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        The Heart Disease Monitoring System is a machine learning-based application that predicts the likelihood of heart disease using patient health data. Users input key medical parameters such as age, blood pressure, cholesterol levels, heart rate, and more into the system. These values are then analyzed using a pre-trained Random Forest algorithm to provide a prediction on the risk of heart disease. This system assists doctors and individuals by offering a quick, data-driven assessment that supports early diagnosis and preventive care. Built with a focus on accuracy and ease of use, the system provides reliable predictions without the need for complex signal analysis or medical equipment. It is particularly useful in rural or resource-limited areas where access to specialists may be delayed.
+                    </p>
+                    <p style="font-style: italic; color: #ffffff; margin-top: 10px;">
+                        "Designed to support early risk detection and decision-making through intelligent machine learning insights."
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">Random Forest</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Healthcare</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header" onclick="toggleProject(this)">
+                    <span class="project-title">🔐 Password Generator App</span>
+                    <span class="dropdown-icon">▼</span>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        The Password Generator App is a Flutter and Dart-based mobile application that generates secure 4-digit passwords using a combination of device-specific and instance-specific identifiers. Upon user interaction, the app applies a custom formula to these unique IDs to generate a new password each time. The result is instantly displayed within the app's interface, providing a quick and user-friendly way to access temporary or secure codes. With a clean and responsive user interface, the app offers a smooth experience without the need for external hardware or internet connectivity.
+                    </p>
+                    <p style="font-style: italic; color: #ffffff; margin-top: 10px;">
+                        "Built to deliver fast, secure password generation through smart logic and device-level uniqueness."
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Dart</span>
+                        <span class="tech-tag">Mobile Development</span>
+                        <span class="tech-tag">Security</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header" onclick="toggleProject(this)">
+                    <span class="project-title">🚔 LSTM-Based Crime Prediction System</span>
+                    <span class="dropdown-icon">▼</span>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        The LSTM-Based Crime Prediction System is a machine learning project that uses Long Short-Term Memory (LSTM) neural networks to forecast future crime patterns based on historical data. By analyzing past crime records—such as location, type, and time—the system learns temporal trends and predicts the likelihood of crimes occurring in specific areas. This helps law enforcement agencies and urban planners make informed decisions, allocate resources more effectively, and enhance public safety. The model is trained on time-series data to capture sequential dependencies, making predictions more accurate over time. The system features a simple interface for data input and visualization of predicted crime trends.
+                    </p>
+                    <p style="font-style: italic; color: #ffffff; margin-top: 10px;">
+                        "An intelligent approach to public safety using deep learning and time-series forecasting."
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">LSTM</span>
+                        <span class="tech-tag">Deep Learning</span>
+                        <span class="tech-tag">Time Series</span>
+                        <span class="tech-tag">Crime Analysis</span>
+                        <span class="tech-tag">Prompt Engineering</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="section">
+            <h2>🏆 Achievements</h2>
+            <div class="achievement">
+                <div class="achievement-title">Best Social Impact Award - Hackathon Vynfest'25</div>
+                <p>Won Best Social Impact Award at the 24-hour Hackathon during Vynfest'25 held at KPRIET, for developing a solution addressing real-world community challenges.</p>
+            </div>
+            <div class="achievement">
+                <div class="achievement-title">Top 100 - National Science Olympiad</div>
+                <p>Secured Top 100 rank in the National Science Olympiad organized by CV Raman Academy, demonstrating strong analytical and scientific thinking.</p>
+            </div>
+            <div class="achievement">
+                <div class="achievement-title">3rd Place - Project Presentation Competition</div>
+                <p>Achieved 3rd Place in the Project Presentation Competition at Nirmala College, showcasing innovation and effective technical communication.</p>
+            </div>
+        </div>
+
+        <!-- Certifications Section -->
+        <div class="section">
+            <h2>📜 Certifications</h2>
+            <div class="achievement">
+                <div class="achievement-title">Machine Learning Specialization (DeepLearning.AI)</div>
+                <p>January 2025 - February 2025</p>
+            </div>
+            <div class="achievement">
+                <div class="achievement-title">Python Bootcamp - Infosys Springboard</div>
+                <p>November 2024</p>
+            </div>
+            <div class="achievement">
+                <div class="achievement-title">Official MongoDB Certification</div>
+                <p>May 2025</p>
+            </div>
+            <div class="achievement">
+                <div class="achievement-title">Linguaskill B2 Grade (CEFR Level)</div>
+                <p>Average Score of 178</p>
+            </div>
+            <div class="achievement">
+                <div class="achievement-title">NPTEL Certifications with Distinction</div>
+                <p>Multiple certifications completed with distinction</p>
+            </div>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="section">
+            <h2>💼 Experience</h2>
+            <div class="achievement">
+                <div class="achievement-title">App Developer Intern</div>
+                <p><strong>Duration:</strong> June 2025 – July 2025</p>
+                <p>Developed a feature-rich e-commerce mobile application using Flutter, enabling product browsing, cart management, and order placement. Built a password generator app with customizable options for length, complexity, and character types, improving security awareness.</p>
+            </div>
+        </div>
+
+        <!-- Links Section - Moved to Bottom -->
+        <div class="links-section">
+            <h2 style="margin-bottom: 20px; color: #ffffff;">🔗 Connect With Me</h2>
+            <div class="links-grid">
+                <a href="https://linkedin.com/in/srinathg13" class="link-card" target="_blank">
+                    <div class="link-icon">💼</div>
+                    <div class="link-title">LinkedIn</div>
+                    <div style="font-size: 0.9em; opacity: 0.8;">linkedin.com/in/srinathg13</div>
+                </a>
+                <a href="https://github.com/Srinath-83" class="link-card" target="_blank">
+                    <div class="link-icon">💻</div>
+                    <div class="link-title">GitHub</div>
+                    <div style="font-size: 0.9em; opacity: 0.8;">github.com/Srinath-83</div>
+                </a>
+                <a href="https://leetcode.com/u/Srinath_13/" class="link-card" target="_blank">
+                    <div class="link-icon">🧮</div>
+                    <div class="link-title">LeetCode</div>
+                    <div style="font-size: 0.9em; opacity: 0.8;">leetcode.com/u/Srinath_13/</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleProject(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.dropdown-icon');
+            
+            // Close all other project contents
+            document.querySelectorAll('.project-content').forEach(pc => {
+                if (pc !== content) {
+                    pc.classList.remove('active');
+                    pc.previousElementSibling.querySelector('.dropdown-icon').classList.remove('active');
+                }
+            });
+            
+            // Toggle current project
+            content.classList.toggle('active');
+            icon.classList.toggle('active');
+        }
+
+        // Scroll reveal animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.section').forEach((section) => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
